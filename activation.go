@@ -1,7 +1,5 @@
 package deep
 
-import "math"
-
 // Mode denotes inference mode
 type Mode int
 
@@ -20,32 +18,14 @@ const (
 
 // OutputActivation returns activation corresponding to prediction mode
 func OutputActivation(c Mode) ActivationType {
-	switch c {
-	case ModeMultiClass:
-		return ActivationSoftmax
-	case ModeRegression:
-		return ActivationLinear
-	case ModeBinary, ModeMultiLabel:
-		return ActivationSigmoid
-	}
-	return ActivationNone
+	_ = "STUB: not implemented"
+	return *new(ActivationType)
 }
 
 // GetActivation returns the concrete activation given an ActivationType
 func GetActivation(act ActivationType) Differentiable {
-	switch act {
-	case ActivationSigmoid:
-		return Sigmoid{}
-	case ActivationTanh:
-		return Tanh{}
-	case ActivationReLU:
-		return ReLU{}
-	case ActivationLinear:
-		return Linear{}
-	case ActivationSoftmax:
-		return Linear{}
-	}
-	return Linear{}
+	_ = "STUB: not implemented"
+	return *new(Differentiable)
 }
 
 // ActivationType is represents a neuron activation function
@@ -77,44 +57,45 @@ type Differentiable interface {
 type Sigmoid struct{}
 
 // F is Sigmoid(x)
-func (a Sigmoid) F(x float64) float64 { return Logistic(x, 1) }
+func (a Sigmoid) F(x float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // Df is Sigmoid'(y), where y = Sigmoid(x)
-func (a Sigmoid) Df(y float64) float64 { return y * (1 - y) }
+func (a Sigmoid) Df(y float64) float64 {
+	_ = "STUB: not implemented"
 
-// Logistic is the logistic function
-func Logistic(x, a float64) float64 {
-	return 1 / (1 + math.Exp(-a*x))
+	// Logistic is the logistic function
+	return 0
 }
+
+func Logistic(x, a float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // Tanh is a hyperbolic activator
 type Tanh struct{}
 
 // F is Tanh(x)
-func (a Tanh) F(x float64) float64 { return (1 - math.Exp(-2*x)) / (1 + math.Exp(-2*x)) }
+func (a Tanh) F(x float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // Df is Tanh'(y), where y = Tanh(x)
-func (a Tanh) Df(y float64) float64 { return 1 - math.Pow(y, 2) }
+func (a Tanh) Df(y float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // ReLU is a rectified linear unit activator
 type ReLU struct{}
 
 // F is ReLU(x)
-func (a ReLU) F(x float64) float64 { return math.Max(x, 0) }
+func (a ReLU) F(x float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // Df is ReLU'(y), where y = ReLU(x)
-func (a ReLU) Df(y float64) float64 {
-	if y > 0 {
-		return 1
-	}
-	return 0
-}
+func (a ReLU) Df(y float64) float64 { _ = "STUB: not implemented"; return 0 }
 
 // Linear is a linear activator
 type Linear struct{}
 
 // F is the identity function
-func (a Linear) F(x float64) float64 { return x }
+func (a Linear) F(x float64) float64 {
+	_ = "STUB: not implemented"
 
-// Df is constant
-func (a Linear) Df(x float64) float64 { return 1 }
+	// Df is constant
+	return 0
+}
+
+func (a Linear) Df(x float64) float64 { _ = "STUB: not implemented"; return 0 }

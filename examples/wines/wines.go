@@ -1,13 +1,8 @@
 package main
 
 import (
-	"bufio"
-	"encoding/csv"
 	"fmt"
-	"io"
 	"math/rand"
-	"os"
-	"strconv"
 	"time"
 
 	"github.com/patrikeh/go-deep"
@@ -48,48 +43,13 @@ func main() {
 }
 
 func load(path string) (training.Examples, error) {
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-	r := csv.NewReader(bufio.NewReader(f))
-
-	var examples training.Examples
-	for {
-		record, err := r.Read()
-		if err == io.EOF {
-			break
-		}
-		examples = append(examples, toExample(record))
-	}
-
-	return examples, nil
+	_ = "STUB: not implemented"
+	return *new(training.Examples), nil
 }
 
 func toExample(in []string) training.Example {
-	res, err := strconv.ParseFloat(in[0], 64)
-	if err != nil {
-		panic(err)
-	}
-	resEncoded := onehot(3, res)
-	var features []float64
-	for i := 1; i < len(in); i++ {
-		res, err := strconv.ParseFloat(in[i], 64)
-		if err != nil {
-			panic(err)
-		}
-		features = append(features, res)
-	}
-
-	return training.Example{
-		Response: resEncoded,
-		Input:    features,
-	}
+	_ = "STUB: not implemented"
+	return *new(training.Example)
 }
 
-func onehot(classes int, val float64) []float64 {
-	res := make([]float64, classes)
-	res[int(val)-1] = 1
-	return res
-}
+func onehot(classes int, val float64) []float64 { _ = "STUB: not implemented"; return nil }
